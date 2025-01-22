@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SecondComponent_2 from '../Components/SecondComponent_2';
 
 export default class About extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class About extends Component {
                             <strong>RECEIVE Articles Automatically. Get 10+ MORE</strong>
                             <p>&nbsp;</p>
               Automatic
+              
           </div>
           <div>
               <img src={require("../images/dev2.jpg")}
@@ -18,6 +20,8 @@ export default class About extends Component {
                    style={{ marginBottom: '20px' }}
                />
           </div>
+          222222222222222222222222222222222222222222222222222222222222
+                      <div> <SecondComponent_2 /> </div> 
         </div>
       )
    }

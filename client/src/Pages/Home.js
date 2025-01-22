@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FirstComponent_1 from '../Components/FirstComponent_1';
 
 export default class Home extends Component {
   render() {
@@ -8,7 +9,8 @@ export default class Home extends Component {
                             <p></p>
                             <strong>Create an Article manually. You can Pin it</strong>
                             <p>&nbsp;</p>
-                            
+                  11111111111111111111111111111111111111111111111111111111
+                  <div> <FirstComponent_1 /> </div> 
           </div>
           {/*<div>
               <img src={require("../images/dev1.jpg")}

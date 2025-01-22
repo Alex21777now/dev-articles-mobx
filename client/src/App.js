@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Header />
 
-      <FirstComponent_1 />
+      {/*<FirstComponent_1 />*/}
       
       <Footer />
     </div>

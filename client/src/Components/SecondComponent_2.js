@@ -11,7 +11,7 @@ import KursVse from "./KursVse";
 
 
 
-export default class FirstComponent_1 extends Component {
+export default class FirstComponent_2 extends Component {
 
 
 

@@ -7,11 +7,185 @@ import { Button } from '@material-ui/core';
 import { useState } from "react";
 import Form from "./Form.js";
 import KursVse from "./KursVse";
+import styled from 'styled-components';
 
 
-export default class FirstComponent_1 extends Component {
+import { makeAutoObservable } from "mobx";
+import { observer } from "mobx-react-lite";
+
+import { Input } from "@material-ui/core";
+import { CardContent } from "@material-ui/core";
+import { Checkbox } from "@material-ui/core";
+import { InputLabel } from "@material-ui/core";
 
 
+const Styles = styled.div`
+  /*padding: 3rem;*/
+
+
+.btn-circle {
+    margin-top: 20px;
+    
+    margin-left: 165px;
+    
+    z-index: 2000;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 13px;
+    white-space: normal; /* восстанавливаем свойству значение по умолчанию */
+}
+`
+
+
+
+class ArticleStore {
+  articles = [];
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  addArticle(article) {
+    if (article.pinned) {
+      this.articles.unshift(article);
+    } else {
+      this.articles.push(article);
+    }
+  }
+
+  updateArticle(index, updatedArticle) {
+    this.articles[index] = updatedArticle;
+    this.sortArticles();
+  }
+
+  deleteArticle(index) {
+    this.articles.splice(index, 1);
+  }
+
+  sortArticles() {
+    this.articles.sort((a, b) => b.pinned - a.pinned);
+  }
+}
+
+const store = new ArticleStore();
+
+const ArticleForm = observer(() => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [pinned, setPinned] = useState(true);
+
+  const handleSubmit = () => {
+    if (title && author && description) {
+      store.addArticle({ title, author, description, image, pinned });
+      setTitle("");
+      setAuthor("");
+      setDescription("");
+      setImage(null);
+      setPinned(true);
+    }
+  };
+
+  return (
+    //<div className="p-4 bg-orange-700 rounded-lg w-80 flex flex-col space-y-2">
+    <div style={{
+      width: "450px",
+      height: "500px",
+      backgroundColor: "#990066", // Eggplant color
+      borderRadius: "10px",
+      //display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+      
+      fontWeight: "bold",
+      boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)",
+    }}>
+      <p>Put the content here</p>
+      <InputLabel>Title</InputLabel>
+      <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+      <InputLabel>Author</InputLabel>
+      <Input value={author} onChange={(e) => setAuthor(e.target.value)} />
+      <InputLabel>Description</InputLabel>
+      <Input value={description} onChange={(e) => setDescription(e.target.value)} />
+      <InputLabel>Image</InputLabel>
+      <Input type="file" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} />
+      <InputLabel className="flex items-center space-x-2">
+        <Checkbox checked={pinned} onCheckedChange={setPinned} />
+        <span>Pinned</span>
+        </InputLabel>
+        <Styles> 
+      {/*<Button onClick={handleSubmit} className="rounded-full">Create</Button>*/}
+      <button type="button" class="btn btn-outline-warning btn-circle float-start" onClick={handleSubmit}>CREATE ^</button>
+        </Styles>
+    </div>
+  );
+});
+
+
+const ArticleList = observer(() => {
+  return (
+    <div className="space-y-2">
+      {store.articles.map((article, index) => (
+        <ArticleItem key={index} article={article} index={index} />
+      ))}
+    </div>
+  );
+});
+
+
+const ArticleItem = observer(({ article, index }) => {
+  const [editing, setEditing] = useState(false);
+  const [editedArticle, setEditedArticle] = useState(article);
+
+  const handleSave = () => {
+    store.updateArticle(index, editedArticle);
+    setEditing(false);
+  };
+
+  return (
+    <Card className="bg-gray-700 p-4 w-96 flex flex-col space-y-2">
+      {editing ? (
+        <>
+          <Input value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
+          <Input value={editedArticle.author} onChange={(e) => setEditedArticle({ ...editedArticle, author: e.target.value })} />
+          <Input value={editedArticle.description} onChange={(e) => setEditedArticle({ ...editedArticle, description: e.target.value })} />
+          <InputLabel className="flex items-center space-x-2">
+            <Checkbox
+              checked={editedArticle.pinned}
+              onCheckedChange={(checked) => {
+                setEditedArticle({ ...editedArticle, pinned: checked });
+                store.updateArticle(index, { ...editedArticle, pinned: checked });
+              }}
+            />
+            <span>Pinned</span>
+          </InputLabel>
+          <Button onClick={handleSave}>Save</Button>
+        </>
+      ) : (
+        <>
+          {article.image && <img src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}
+          <h3 className="text-lg font-bold">{article.title}</h3>
+          <p className="text-sm text-gray-300">by {article.author}</p>
+          <p className="text-gray-400">{article.description}</p>
+          <Button onClick={() => setEditing(true)}>Edit</Button>
+          <Button onClick={() => store.deleteArticle(index)} className="bg-red-500">Delete</Button>
+        </>
+      )}
+    </Card>
+  );
+});
+
+
+//export default class FirstComponent_1 extends Component {
+  export default function FirstComponent_1 () {
+  
+/*
 
 state = {
   adult: undefined,
@@ -61,99 +235,32 @@ this.setState({
 console.log(this.state);  
 
 }
-
-  render() {
+*/
+//  render() {
     
   
     return (
-    <div className="flex-container">
+  
+   <div className="flex-container">
  
           <div className="flex-child magenta">
     
-{/*          
 
-      <Form kursMethod1={this.gettingKurs1}
-
-          
-
-         adult1={this.state.adult1}
-         backdrop_path1={this.state.backdrop_path1}
-         genre_ids1={this.state.genre_ids1}
-         id1={this.state.id1}
-         original_language1={this.state.original_language1}
-         original_title1={this.state.original_title1}
-         overview1={this.state.overview1}
-         popularity1={this.state.popularity1}
-         poster_path1={this.state.poster_path1}
-         release_date1={this.state.release_date1}
-         title1={this.state.title1}
-         video1={this.state.video1}
-         vote_average1={this.state.vote_average1}
-         vote_count1={this.state.vote_count1}
-         error={this.state.error}
-         data1={this.state.data1}
-
-       />
-
-      <>
-
-
-{
-  <KursVse
   
 
-         adult1={this.state.adult1}
-         backdrop_path1={this.state.backdrop_path1}
-         genre_ids1={this.state.genre_ids1}
-         id1={this.state.id1}
-         original_language1={this.state.original_language1}
-         original_title1={this.state.original_title1}
-         overview1={this.state.overview1}
-         popularity1={this.state.popularity1}
-         poster_path1={this.state.poster_path1}
-         release_date1={this.state.release_date1}
-         title1={this.state.title1}
-         video1={this.state.video1}
-         vote_average1={this.state.vote_average1}
-         vote_count1={this.state.vote_count1}
-         error={this.state.error}
-         data1={this.state.data1} 
+  <div className="p-6 flex flex-col items-center space-y-4">
+      <ArticleForm />
+      <ArticleList />
+  </div>
 
-   />
- }
-     </>
-*/}
-  
-  Fortune
-Elon Musk claims full self driving is so advanced Tesla owners are turning it off and steering with their knees to check text messages
-Amanda Gerut
-Updated Thu, January 30, 2025 at 11:59 AM GMT+2·3 min read
-Tesla CEO Elon Musk told investors and analysts the electric vehicle maker’s investments in autonomous vehicles and robots may have set it on a path to becoming the most valuable company in the world.
 
-During a call with investors and analysts on Wednesday, Tesla CEO Elon Musk said the company is on course to reap immense gains in the coming years due to its development of autonomy. In fact, he said Tesla’s full self driving (FSD) feature has advanced so profoundly in its development that drivers are turning the feature off so they don’t get hit with a series of annoying beeps for removing their hands from the steering wheel.
-
-“Right now, there is this perverse situation where people actually go to manual driving to check their text messages so the computer doesn’t yell at them,” said Musk. Drivers turn off autopilot, he claimed, and steer with their knees so they can read emails and texts. This is “significantly less safe” than if drivers could take their hands off the steering wheel, he noted. Musk commented in response to an analyst who complained that autopilot was “super boring” because he didn’t need to intervene. The analyst asked Musk if Tesla was considering offering unsupervised driving that allowed a user five seconds or so to handle their phones.
-
-Musk’s leadership at Tesla has seen numerous investigations and recalls of the cars in recent years. In contrast, the EU’s regulatory approach is slower and FSD still isn’t permitted overseas.
-Musk cautioned that Tesla is taking it slow with FSD and will roll out an unsupervised autonomous fleet in Austin, Tex. in June. He compared it to dipping a toe in the water, followed by a few toes, followed by a foot, before diving in as a safety precaution.
-
-Musk made his comments during Tesla’s fourth quarter question-and-answer call with financial analysts after the market closed on Wednesday. It was Musk’s first exchange with analysts since President Trump’s election win in November. He avoided answering questions about his proximity to Trump, despite significant shareholder interest in the topic.
-
-Prior to the call, the most up-voted question about Musk posed by a retail shareholder on Tesla’s online platform for Q&A was: “How is having a position in the White House going to affect the time spent with Tesla?” Runners up were variations on the same theme. Shareholders wanted to know whether Musk was dedicating enough time to Tesla, whether sales were being lost due to Musk’s political activities, and clarity on the hand gestures Musk made during President Trump’s inauguration.
-
-The questions were not asked during the Q&A.
-
-For the full year 2024, Tesla’s revenues were up 1% to $98 billion while its vehicle deliveries fell 1% year-over-year to 1.8 million. Operating expenses rose 18% for the year, largely because of significant spending on artificial intelligence and research and development efforts.
-
-Musk said the investments in 2024 were critical to paving the way for manufacturing products that will feature AI and robotics. Yet, he also predicted the investment will bear fruit in the future that could see Tesla become the most valuable company in the world “by far,” said Musk.
-
-He said critics of Tesla’s plans for an autonomous future have called him the “boy who cried wolf” in the past but now, Tesla has a “self-driving wolf.” He claimed prior versions of FSD, which he compared to a toddler who has begun to mature, have been developed more thoroughly.
-
-This story was originally featured on Fortune.com
+ 
 
 </div>
 
     </div>
     );
-            }
+         //   }
           }
+
+              

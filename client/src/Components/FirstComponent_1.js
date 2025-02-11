@@ -3,11 +3,13 @@ import {
   Card
 
 } from "react-bootstrap";
-import { Button } from '@material-ui/core';
+//import { Button } from '@material-ui/core';
+import { Button } from "react-bootstrap";
 import { useState } from "react";
 import Form from "./Form.js";
 import KursVse from "./KursVse";
 import styled from 'styled-components';
+import { CloseButton } from "react-bootstrap";
 
 
 import { makeAutoObservable } from "mobx";
@@ -25,9 +27,9 @@ const Styles = styled.div`
 
 .btn-circle {
     margin-top: 20px;
-    
+
     margin-left: 165px;
-    
+
     z-index: 2000;
     width: 120px;
     height: 120px;
@@ -95,14 +97,14 @@ const ArticleForm = observer(() => {
     //<div className="p-4 bg-orange-700 rounded-lg w-80 flex flex-col space-y-2">
     <div style={{
       width: "450px",
-      height: "500px",
+      height: "645px",
       backgroundColor: "#990066", // Eggplant color
       borderRadius: "10px",
       //display: "flex",
       alignItems: "center",
       justifyContent: "center",
       color: "white",
-      
+
       fontWeight: "bold",
       boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)",
     }}>
@@ -111,17 +113,19 @@ const ArticleForm = observer(() => {
       <Input value={title} onChange={(e) => setTitle(e.target.value)} />
       <InputLabel>Author</InputLabel>
       <Input value={author} onChange={(e) => setAuthor(e.target.value)} />
-      <InputLabel>Description</InputLabel>
-      <Input value={description} onChange={(e) => setDescription(e.target.value)} />
+      <InputLabel>Article</InputLabel>
+      <br></br>
+      <Input style={{width: "250px",
+      height: "150px", backgroundColor: "white"}} value={description} onChange={(e) => setDescription(e.target.value)} />
       <InputLabel>Image</InputLabel>
       <Input type="file" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} />
       <InputLabel className="flex items-center space-x-2">
         <Checkbox checked={pinned} onCheckedChange={setPinned} />
         <span>Pinned</span>
         </InputLabel>
-        <Styles> 
+        <Styles>
       {/*<Button onClick={handleSubmit} className="rounded-full">Create</Button>*/}
-      <button type="button" class="btn btn-outline-warning btn-circle float-start" onClick={handleSubmit}>CREATE ^</button>
+      <button type="button" class="btn btn-outline-success btn-circle float-start" onClick={handleSubmit}>CREATE ^</button>
         </Styles>
     </div>
   );
@@ -149,7 +153,20 @@ const ArticleItem = observer(({ article, index }) => {
   };
 
   return (
-    <Card className="bg-gray-700 p-4 w-96 flex flex-col space-y-2">
+    //<Card className="bg-gray-700 p-4 w-96 flex flex-col space-y-2">
+    <Card style={{
+      width: "450px",
+      height: "790px",
+      backgroundColor: "#62e371", // Light green color
+      borderRadius: "10px",
+      //display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+
+      fontWeight: "bold",
+      boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)",
+    }}>
       {editing ? (
         <>
           <Input value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
@@ -169,12 +186,14 @@ const ArticleItem = observer(({ article, index }) => {
         </>
       ) : (
         <>
-          {article.image && <img src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}
+          <CloseButton className="position-absolute top-0 end-0 m-2" onClick={() => store.deleteArticle(index)} />
+          {article.image && <img style={{width: "435px",
+      height: "250px"}} src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}
           <h3 className="text-lg font-bold">{article.title}</h3>
           <p className="text-sm text-gray-300">by {article.author}</p>
           <p className="text-gray-400">{article.description}</p>
-          <Button onClick={() => setEditing(true)}>Edit</Button>
-          <Button onClick={() => store.deleteArticle(index)} className="bg-red-500">Delete</Button>
+          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="warning mt-1" onClick={() => setEditing(true)}>Edit</Button>
+          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="danger mt-1" onClick={() => store.deleteArticle(index)}>Delete</Button>
         </>
       )}
     </Card>
@@ -184,7 +203,7 @@ const ArticleItem = observer(({ article, index }) => {
 
 //export default class FirstComponent_1 extends Component {
   export default function FirstComponent_1 () {
-  
+
 /*
 
 state = {
@@ -202,8 +221,8 @@ state = {
   video: undefined,
   vote_average: undefined,
   vote_count: undefined
-  
-  
+
+
 }
 
 async componentDidMount() {
@@ -232,21 +251,21 @@ this.setState({
   data1: data1,
   error: ""
 });
-console.log(this.state);  
+console.log(this.state);
 
 }
 */
 //  render() {
-    
-  
-    return (
-  
-   <div className="flex-container">
- 
-          <div className="flex-child magenta">
-    
 
-  
+
+    return (
+
+   <div className="flex-container">
+
+          <div className="flex-child magenta">
+
+
+
 
   <div className="p-6 flex flex-col items-center space-y-4">
       <ArticleForm />
@@ -254,7 +273,7 @@ console.log(this.state);
   </div>
 
 
- 
+
 
 </div>
 
@@ -262,5 +281,3 @@ console.log(this.state);
     );
          //   }
           }
-
-              

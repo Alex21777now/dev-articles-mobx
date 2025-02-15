@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import { useState } from "react";
 import Form from "./Form.js";
 import KursVse from "./KursVse";
+import "../App.css";
 
 
 

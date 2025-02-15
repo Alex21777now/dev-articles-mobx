@@ -9,11 +9,11 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+/*@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+}*/
 
 .App-header {
   background-color: #282c34;
@@ -52,8 +52,8 @@
 } */
 
 .flex-container {
-  display: flex;
-}
+   display: flex;
+ }
 
 .flex-child {
   flex: 1;
@@ -84,3 +84,24 @@
   border: 1px solid grey;
 }
 
+/* 
+@media (min-width: 992px) {
+  .flex-child-magenta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .flex-child-magenta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 575px) {
+  .flex-child-magenta {
+    grid-template-columns: 1fr;
+  }
+}
+  */

@@ -9,6 +9,8 @@ import { useState } from "react";
 import Form from "./Form.js";
 import KursVse from "./KursVse";
 import styled from 'styled-components';
+import "../App.css";
+
 import { CloseButton } from "react-bootstrap";
 
 

@@ -71,7 +71,7 @@ console.log(this.state);
     return (
     <div className="flex-container">
  
-          <div className="flex-child magenta">
+    <div className="flex-child magenta">     
     
           
 
@@ -127,7 +127,7 @@ console.log(this.state);
      </>
 
        
-</div>
+     </div>
 
     </div>
     );

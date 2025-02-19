@@ -52,7 +52,8 @@
 } */
 
 .flex-container {
-   display: flex;
+  display: flex;
+
  }
 
 .flex-child {
@@ -86,22 +87,22 @@
 
 /* 
 @media (min-width: 992px) {
-  .flex-child-magenta {
+  .flex-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 
 @media (min-width: 576px) and (max-width: 991px) {
-  .flex-child-magenta {
+  .flex-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 
 @media (max-width: 575px) {
-  .flex-child-magenta {
+  .flex-container {
     grid-template-columns: 1fr;
   }
 }
-  */
+ */ 

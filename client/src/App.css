@@ -51,14 +51,15 @@
   border: 2px gray;
 } */
 
-.flex-container {
+/*.flex-container {
   display: flex;
 
- }
+ } */
 
-.flex-child {
+.flex-child-magenta{
   flex: 1;
   border: 1px solid yellow;
+  background-color: rgb(65, 32, 32);
 }  
 
 .flex-child:first-child {
@@ -85,7 +86,7 @@
   border: 1px solid grey;
 }
 
-/* 
+/*
 @media (min-width: 992px) {
   .flex-container {
     grid-template-columns: repeat(3, 1fr);
@@ -105,4 +106,4 @@
     grid-template-columns: 1fr;
   }
 }
- */ 
+*/ 

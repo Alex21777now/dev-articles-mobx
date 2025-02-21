@@ -123,10 +123,14 @@ return (
     <div>
         <p>{<div><p>&nbsp;&nbsp;&nbsp;</p></div>}</p>
         <div> 
-                <FormControl
+                <FormControl style={{
+      width: "95%", position: "relative",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)"}}
                   type="text"
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder='Search movies'
+                  placeholder='Search Articles about Movies'
                   className="mr-sm-2"
                 />&emsp;
                 <p></p>

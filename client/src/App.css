@@ -58,6 +58,8 @@
 
 .flex-child-magenta{
   flex: 1;
+  /*display: grid;
+  gap: 20px;*/
   border: 1px solid yellow;
   background-color: rgb(65, 32, 32);
 }  
@@ -88,21 +90,21 @@
 
 /*
 @media (min-width: 992px) {
-  .flex-container {
+  .flex-child-magenta {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 
 @media (min-width: 576px) and (max-width: 991px) {
-  .flex-container {
+  .flex-child-magenta {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 
 @media (max-width: 575px) {
-  .flex-container {
+  .flex-child-magenta {
     grid-template-columns: 1fr;
   }
 }

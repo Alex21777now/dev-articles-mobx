@@ -127,7 +127,7 @@ const ArticleForm = observer(() => {
         </InputLabel>
         <Styles>
       {/*<Button onClick={handleSubmit} className="rounded-full">Create</Button>*/}
-      <button type="button" class="btn btn-outline-success btn-circle float-start" onClick={handleSubmit}>CREATE ^</button>
+      <button type="button" class="btn btn-success btn-circle float-start" onClick={handleSubmit}>CREATE ^</button>
         </Styles>
     </div>
   );
@@ -262,7 +262,7 @@ console.log(this.state);
 
     return (
 
-   <div className="flex-container">
+   
 
           <div className="flex-child magenta">
 
@@ -279,7 +279,7 @@ console.log(this.state);
 
 </div>
 
-    </div>
+    
     );
          //   }
           }

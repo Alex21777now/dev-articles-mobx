@@ -28,10 +28,11 @@ const Styles = styled.div`
 
 
 .btn-circle {
-    margin-top: 20px;
+        margin-top: 20px;
 
     margin-left: 165px;
-
+    
+    
     z-index: 2000;
     width: 120px;
     height: 120px;
@@ -206,6 +207,12 @@ const ArticleItem = observer(({ article, index }) => {
 //export default class FirstComponent_1 extends Component {
   export default function FirstComponent_1 () {
 
+    function scrollToTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Для плавной анимированной прокрутки
+      });
+    };
 /*
 
 state = {
@@ -266,7 +273,9 @@ console.log(this.state);
 
           <div className="flex-child magenta">
 
-
+  <Styles>
+    <button type="button" class="btn btn-outline-info btn-circle float-end" style={{ width: 90, height: 90, position: "fixed", top: 183, right: 30 }}  onClick={() => scrollToTop()}><i class="fas fa-map">GO UPWARD ^</i></button>
+  </Styles>
 
 
   <div className="p-6 flex flex-col items-center space-y-4">

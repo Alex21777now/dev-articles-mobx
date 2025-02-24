@@ -18,6 +18,7 @@ import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react-lite";
 
 import { Input } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
 import { Checkbox } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
@@ -118,8 +119,8 @@ const ArticleForm = observer(() => {
       <Input value={author} onChange={(e) => setAuthor(e.target.value)} />
       <InputLabel>Article</InputLabel>
       <br></br>
-      <Input style={{width: "250px",
-      height: "150px", backgroundColor: "white"}} value={description} onChange={(e) => setDescription(e.target.value)} />
+      <TextField multiline style={{width: "400px",
+      height: "150px", backgroundColor: "white", padding: "10px", boxSizing: "border-box", overflow: "auto", whiteSpace: "pre-wrap", wordBreak: "break-word" }} value={description} onChange={(e) => setDescription(e.target.value)} />
       <InputLabel>Image</InputLabel>
       <Input type="file" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} />
       <InputLabel className="flex items-center space-x-2">
@@ -159,20 +160,24 @@ const ArticleItem = observer(({ article, index }) => {
     //<Card className="bg-gray-700 p-4 w-96 flex flex-col space-y-2">
     <Card style={{
       width: "450px",
-      height: "790px",
-      backgroundColor: "#62e371", // Light green color
-      borderRadius: "10px",
+      //height: "790px",
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "rgb(65, 32, 32)", // Light green color #62e371
+      borderRadius: "20px",
+      borderColor: " #62e371",
+      borderWidth: "1px",
       //display: "flex",
       alignItems: "center",
       justifyContent: "center",
       color: "white",
-
+      marginBottom: "10px",
       fontWeight: "bold",
       boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)",
     }}>
       {editing ? (
         <>
-          <Input value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
+          <Input style={{ marginTop: "10px" }} value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
           <Input value={editedArticle.author} onChange={(e) => setEditedArticle({ ...editedArticle, author: e.target.value })} />
           <Input value={editedArticle.description} onChange={(e) => setEditedArticle({ ...editedArticle, description: e.target.value })} />
           <InputLabel className="flex items-center space-x-2">
@@ -185,18 +190,18 @@ const ArticleItem = observer(({ article, index }) => {
             />
             <span>Pinned</span>
           </InputLabel>
-          <Button onClick={handleSave}>Save</Button>
+          <Button style={{ marginBottom: "10px" }} onClick={handleSave}>Save</Button>
         </>
       ) : (
         <>
           <CloseButton className="position-absolute top-0 end-0 m-2" onClick={() => store.deleteArticle(index)} />
-          {article.image && <img style={{width: "435px",
-      height: "250px"}} src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}
+          {article.image && <img style={{ marginTop: "10px", width: "435px",
+      height: "250px", objectFit: "contain" }} src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}<br></br>
           <h3 className="text-lg font-bold">{article.title}</h3>
           <p className="text-sm text-gray-300">by {article.author}</p>
-          <p className="text-gray-400">{article.description}</p>
-          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="warning mt-1" onClick={() => setEditing(true)}>Edit</Button>
-          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="danger mt-1" onClick={() => store.deleteArticle(index)}>Delete</Button>
+          <p className="text-gray-400" style={{ marginLeft: '10px', marginRight: '10px' }} >{article.description}</p>
+          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="info mt-1" onClick={() => setEditing(true)}>Edit</Button><br></br>
+          <Button style={{ display: 'inline-block', marginRight: '3px', marginBottom: "10px" }} variant="info mt-1" onClick={() => store.deleteArticle(index)}>Delete</Button>
         </>
       )}
     </Card>
@@ -280,6 +285,7 @@ console.log(this.state);
 
   <div className="p-6 flex flex-col items-center space-y-4">
       <ArticleForm />
+      <br></br>
       <ArticleList />
   </div>
 

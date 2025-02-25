@@ -178,8 +178,9 @@ const ArticleItem = observer(({ article, index }) => {
       {editing ? (
         <>
           <Input style={{ marginTop: "10px" }} value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
-          <Input value={editedArticle.author} onChange={(e) => setEditedArticle({ ...editedArticle, author: e.target.value })} />
-          <Input value={editedArticle.description} onChange={(e) => setEditedArticle({ ...editedArticle, description: e.target.value })} />
+          <Input value={editedArticle.author} onChange={(e) => setEditedArticle({ ...editedArticle, author: e.target.value })} /><br></br>
+          <TextField multiline style={{width: "400px",
+      height: "150px", backgroundColor: "white", padding: "10px", boxSizing: "border-box", overflow: "auto", whiteSpace: "pre-wrap", wordBreak: "break-word" }} value={editedArticle.description} onChange={(e) => setEditedArticle({ ...editedArticle, description: e.target.value })} />
           <InputLabel className="flex items-center space-x-2">
             <Checkbox
               checked={editedArticle.pinned}
@@ -197,9 +198,20 @@ const ArticleItem = observer(({ article, index }) => {
           <CloseButton className="position-absolute top-0 end-0 m-2" onClick={() => store.deleteArticle(index)} />
           {article.image && <img style={{ marginTop: "10px", width: "435px",
       height: "250px", objectFit: "contain" }} src={article.image} alt="Article" className="w-full h-32 object-cover rounded" />}<br></br>
+          
           <h3 className="text-lg font-bold">{article.title}</h3>
           <p className="text-sm text-gray-300">by {article.author}</p>
           <p className="text-gray-400" style={{ marginLeft: '10px', marginRight: '10px' }} >{article.description}</p>
+          <InputLabel className="flex items-center space-x-2">
+            <Checkbox
+              checked={editedArticle.pinned}
+              onCheckedChange={(checked) => {
+                setEditedArticle({ ...editedArticle, pinned: checked });
+                store.updateArticle(index, { ...editedArticle, pinned: checked });
+              }}
+            />
+            <span>Pinned</span>
+          </InputLabel>
           <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="info mt-1" onClick={() => setEditing(true)}>Edit</Button><br></br>
           <Button style={{ display: 'inline-block', marginRight: '3px', marginBottom: "10px" }} variant="info mt-1" onClick={() => store.deleteArticle(index)}>Delete</Button>
         </>

@@ -7,7 +7,7 @@ export default class About extends Component {
         <div>
           <div>
           <p></p>
-                            <strong>RECEIVE Articles Automatically. Get 10+ MORE</strong>
+                            <strong>RECEIVE Articles Automatically</strong>
                             <p>&nbsp;</p>
               Automatic
               

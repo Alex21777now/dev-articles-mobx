@@ -7,7 +7,7 @@ export default class Home extends Component {
         <div>
           <div>
                             <p></p>
-                            <strong>Create an Article manually. You can Pin it</strong>
+                            <strong>Create an Article manually</strong>
                             <p>&nbsp;</p>
                   11111111111111111111111111111111111111111111111111111111
                   <div> <FirstComponent_1 /> </div> 

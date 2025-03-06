@@ -177,6 +177,7 @@ const ArticleItem = observer(({ article, index }) => {
     }}>
       {editing ? (
         <>
+          
           <Input style={{ marginTop: "10px" }} value={editedArticle.title} onChange={(e) => setEditedArticle({ ...editedArticle, title: e.target.value })} />
           <Input value={editedArticle.author} onChange={(e) => setEditedArticle({ ...editedArticle, author: e.target.value })} /><br></br>
           <TextField multiline style={{width: "400px",

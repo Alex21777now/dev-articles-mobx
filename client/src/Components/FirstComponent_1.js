@@ -151,6 +151,11 @@ const ArticleItem = observer(({ article, index }) => {
   const [editing, setEditing] = useState(false);
   const [editedArticle, setEditedArticle] = useState(article);
 
+  const handleEdit = () => { // UPDATED
+    setEditedArticle({ ...article, image: article.image }); // UPDATED: Reset form with article data
+    setEditing(true);
+  };
+
   const handleSave = () => {
     store.updateArticle(index, editedArticle);
     setEditing(false);
@@ -213,7 +218,7 @@ const ArticleItem = observer(({ article, index }) => {
             />
             <span>Pinned</span>
           </InputLabel>
-          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="info mt-1" onClick={() => setEditing(true)}>Edit</Button><br></br>
+          <Button style={{ display: 'inline-block', marginRight: '3px' }} variant="info mt-1" onClick={handleEdit}>Edit</Button><br></br>
           <Button style={{ display: 'inline-block', marginRight: '3px', marginBottom: "10px" }} variant="info mt-1" onClick={() => store.deleteArticle(index)}>Delete</Button>
         </>
       )}

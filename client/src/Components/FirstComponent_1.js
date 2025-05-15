@@ -300,15 +300,43 @@ console.log(this.state);
     <button type="button" class="btn btn-outline-info btn-circle float-end" style={{ width: 90, height: 90, position: "fixed", top: 183, right: 30 }}  onClick={() => scrollToTop()}><i class="fas fa-map">GO UPWARD ^</i></button>
   </Styles>
 
-
+  <div style={{ display: 'flex'}}>
   <div className="p-6 flex flex-col items-center space-y-4">
       <ArticleForm />
       <br></br>
       <ArticleList />
   </div>
-
-
-
+ 
+ <div style={{ width: '50%', backgroundColor: 'darkgreen', padding: '20px', margin: '20px'}}>
+     <p>Watch CNN</p>
+ <iframe
+        src="https://www.livenewsmag.com/livecnn/"
+        title="Sky News Live"
+        frameBorder="0"
+        allow="encrypted-media"
+       
+      ></iframe>
+       <br/><br/><br/>
+      <p>Watch Fox News</p> 
+  <iframe
+        src="https://www.livenewsmag.com/fox-news-live-stream/"
+        title="Sky News Live"
+        frameBorder="0"
+        allow="encrypted-media"
+       
+      ></iframe>
+       <br/><br/><br/>
+      <p>Watch MSNBC</p>
+  <iframe
+        src="https://www.livenewsmag.com/msnbc-news-live-stream/"
+        title="Sky News Live"
+        frameBorder="0"
+        allow="encrypted-media"
+       
+      ></iframe>    
+       <br/><br/><br/>
+    </div>
+    </div>
 
 </div>
 

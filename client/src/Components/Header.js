@@ -131,7 +131,7 @@ const handleSubmit = async (e) => {
                 width="30"
                 className="d-inline-block align-top"
                 alt="Logo"
-              /> DEV ARTICLES MOBX
+              /> DEV TV ARTICLES MOBX ver Desktop
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
